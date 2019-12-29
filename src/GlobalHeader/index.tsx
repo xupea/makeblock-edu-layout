@@ -1,11 +1,9 @@
 import './index.less';
 
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import { Icon } from 'antd';
 import { HeaderViewProps } from '../Header';
 import { defaultRenderLogo, SiderMenuProps } from '../SiderMenu/SiderMenu';
-import { isBrowser } from '../utils/utils';
 import { WithFalse } from '../typings';
 
 export interface GlobalHeaderProps {
@@ -21,10 +19,6 @@ export interface GlobalHeaderProps {
   menuHeaderRender?: SiderMenuProps['menuHeaderRender'];
 }
 
-const defaultRenderCollapsedButton = (collapsed?: boolean) => (
-  <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'} />
-);
-
 const renderLogo = (
   menuHeaderRender: SiderMenuProps['menuHeaderRender'],
   logoDom: React.ReactNode,
@@ -38,62 +32,29 @@ const renderLogo = (
   return logoDom;
 };
 
-export default class GlobalHeader extends Component<GlobalHeaderProps> {
-  triggerResizeEvent = () => {
-    if (isBrowser()) {
-      const event = document.createEvent('HTMLEvents');
-      event.initEvent('resize', true, false);
-      window.dispatchEvent(event);
-    }
-  };
+const GlobalHeader: React.FC<GlobalHeaderProps> = props => {
+  const {
+    isMobile,
+    logo,
+    rightContentRender,
+    menuHeaderRender,
+    className: propClassName,
+    style,
+  } = props;
+  const className = classNames(propClassName, 'ant-pro-global-header');
 
-  toggle = () => {
-    const { collapsed, onCollapse } = this.props;
-    if (onCollapse) onCollapse(!collapsed);
-    this.triggerResizeEvent();
-  };
+  const logoDom = (
+    <a className="ant-pro-global-header-logo" key="logo">
+      {defaultRenderLogo(logo)}
+    </a>
+  );
+  return (
+    <div className={className} style={style}>
+      {isMobile && renderLogo(menuHeaderRender, logoDom)}
+      <div style={{ flex: 1 }} />
+      {rightContentRender && rightContentRender(props)}
+    </div>
+  );
+};
 
-  renderCollapsedButton = () => {
-    const {
-      collapsed,
-      collapsedButtonRender = defaultRenderCollapsedButton,
-      menuRender,
-    } = this.props;
-
-    if (collapsedButtonRender !== false && menuRender !== false) {
-      return (
-        <span className="ant-pro-global-header-trigger" onClick={this.toggle}>
-          {collapsedButtonRender(collapsed)}
-        </span>
-      );
-    }
-
-    return null;
-  };
-
-  render(): React.ReactNode {
-    const {
-      isMobile,
-      logo,
-      rightContentRender,
-      menuHeaderRender,
-      className: propClassName,
-      style,
-    } = this.props;
-    const className = classNames(propClassName, 'ant-pro-global-header');
-
-    const logoDom = (
-      <span className="ant-pro-global-header-logo" key="logo">
-        {defaultRenderLogo(logo)}
-      </span>
-    );
-    return (
-      <div className={className} style={style}>
-        {isMobile && renderLogo(menuHeaderRender, logoDom)}
-        {this.renderCollapsedButton()}
-        <div style={{ flex: 1 }} />
-        {rightContentRender && rightContentRender(this.props)}
-      </div>
-    );
-  }
-}
+export default GlobalHeader;
