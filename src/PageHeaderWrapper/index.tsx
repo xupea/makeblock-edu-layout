@@ -104,7 +104,7 @@ const defaultPageHeaderRender = (
   }
   let pageHeaderTitle = title;
   if (!title && title !== false) {
-    pageHeaderTitle = value.title;
+    pageHeaderTitle = false;
   }
   return (
     <>
