@@ -91,6 +91,51 @@
     }
   }
 
+  &-button {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: none;
+    text-decoration: none;
+    vertical-align: middle;
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  &-collapse {
+    position: absolute;
+    top: calc(50% - 32px);
+    right: -20px;
+    z-index: 9;
+    width: 0;
+    height: 64px;
+    padding: 0;
+    color: #c1c1c1;
+    line-height: 46px;
+    background: none;
+    border-color: transparent transparent transparent #ebebeb;
+    border-width: 9px 0 9px 20px;
+    i {
+      position: relative;
+      left: -15px;
+      width: 12px;
+    }
+  }
+
+  &-button:active {
+    outline: none;
+  }
+
+  &-button:focus {
+    outline: none;
+  }
+
   .top-nav-menu li.ant-menu-item {
     height: @nav-header-height;
     line-height: @nav-header-height;

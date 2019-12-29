@@ -78,7 +78,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
         // hideLoading
         // hideCopyButton
         // hideHintAlert
-        settings={settings}
+        // settings={settings}
         onSettingChange={config => setSettings(config)}
       />
     </>

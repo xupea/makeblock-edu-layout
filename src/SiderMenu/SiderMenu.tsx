@@ -7,6 +7,8 @@ import './index.less';
 import { WithFalse } from '../typings';
 import BaseMenu, { BaseMenuProps } from './BaseMenu';
 import MenuCounter from './Counter';
+import CollapsedButton from './CollapsedButton';
+import { isBrowser } from '../utils/utils';
 
 const { Sider } = Layout;
 
@@ -89,6 +91,19 @@ const SiderMenu: React.FC<SiderMenuProps> = props => {
 
   const headerDom = defaultRenderLogoAndTitle(props);
 
+  const triggerResizeEvent = () => {
+    if (isBrowser()) {
+      const event = document.createEvent('HTMLEvents');
+      event.initEvent('resize', true, false);
+      window.dispatchEvent(event);
+    }
+  };
+
+  const toggle = () => {
+    if (onCollapse) onCollapse(!collapsed);
+    triggerResizeEvent();
+  };
+
   return (
     <Sider
       collapsible
@@ -140,6 +155,8 @@ const SiderMenu: React.FC<SiderMenuProps> = props => {
           </Menu>
         </div>
       )}
+
+      <CollapsedButton collapsed={collapsed} toggle={toggle} />
     </Sider>
   );
 };
