@@ -30,7 +30,6 @@ interface HeaderViewState {
 class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
   renderContent = () => {
     const { isMobile, onCollapse, navTheme, layout, headerRender } = this.props;
-    console.log(this.props)
     const isTop = layout === 'topmenu';
     let defaultDom = <GlobalHeader onCollapse={onCollapse} {...this.props} />;
     if (isTop && !isMobile) {

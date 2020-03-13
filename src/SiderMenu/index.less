@@ -91,6 +91,40 @@
     }
   }
 
+  &-collapse-btn {
+    position: fixed;
+    top: calc(50% - 32px);
+    left: 256px;
+    z-index: 9;
+    padding: 0;
+    border-width: 9px 0 9px 20px;
+    border-color: transparent transparent transparent red;
+    background: none;
+    width: 0;
+    height: 64px;
+    line-height: 46px;
+    color: #c1c1c1;
+    transition: all 0.2s;
+    outline: none;
+  }
+
+  &-collapse-btn-collapse {
+    position: fixed;
+    top: calc(50% - 32px);
+    left: 80px;
+    z-index: 9;
+    padding: 0;
+    border-width: 9px 0 9px 20px;
+    border-color: transparent transparent transparent red;
+    background: none;
+    width: 0;
+    height: 64px;
+    line-height: 46px;
+    color: #c1c1c1;
+    transition: all 0.2s;
+    outline: none;
+  }
+
   .top-nav-menu li.ant-menu-item {
     height: @nav-header-height;
     line-height: @nav-header-height;

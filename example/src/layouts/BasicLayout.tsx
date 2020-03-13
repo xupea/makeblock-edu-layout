@@ -40,6 +40,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   return (
     <>
       <ProLayout
+        disableMobile={true}
         logo={logo}
         menuHeaderRender={(logoDom, titleDom) => (
           <Link to="/">
