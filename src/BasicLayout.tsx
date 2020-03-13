@@ -351,6 +351,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     theme: (navTheme || 'dark').toLocaleLowerCase().includes('dark')
       ? 'dark'
       : 'light',
+    breadcrumbProps,
   });
 
   // render footer dom

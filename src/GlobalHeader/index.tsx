@@ -1,12 +1,14 @@
 import './index.less';
 
 import React, { Component } from 'react';
+import { PageHeader } from 'antd';
 import classNames from 'classnames';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { HeaderViewProps } from '../Header';
 import { defaultRenderLogo, SiderMenuProps } from '../SiderMenu/SiderMenu';
 import { isBrowser } from '../utils/utils';
 import { WithFalse } from '../typings';
+import { BreadcrumbProps } from '../utils/getBreadcrumbProps';
 
 export interface GlobalHeaderProps {
   collapsed?: boolean;
@@ -19,6 +21,7 @@ export interface GlobalHeaderProps {
   className?: string;
   style?: React.CSSProperties;
   menuHeaderRender?: SiderMenuProps['menuHeaderRender'];
+  breadcrumbProps: BreadcrumbProps;
 }
 
 const defaultRenderCollapsedButton = (collapsed?: boolean) =>
@@ -78,6 +81,7 @@ export default class GlobalHeader extends Component<GlobalHeaderProps> {
       menuHeaderRender,
       className: propClassName,
       style,
+      breadcrumbProps,
     } = this.props;
     const className = classNames(propClassName, 'ant-pro-global-header');
 
@@ -86,10 +90,11 @@ export default class GlobalHeader extends Component<GlobalHeaderProps> {
         {defaultRenderLogo(logo)}
       </span>
     );
+    console.log()
     return (
       <div className={className} style={style}>
         {isMobile && renderLogo(menuHeaderRender, logoDom)}
-        {this.renderCollapsedButton()}
+        <PageHeader title={null} breadcrumb={breadcrumbProps} />
         <div style={{ flex: 1 }} />
         {rightContentRender && rightContentRender(this.props)}
       </div>
